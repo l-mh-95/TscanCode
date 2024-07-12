@@ -68,7 +68,7 @@ bool CFileDependTable::Create(
 bool CFileDependTable::BuildTable(CFolder* pParent, const std::string& sPath, fp_fileFilter fp)
 {
 	assert(pParent != NULL);
-	// Èç¹ûÒÑ¾­ÓÐÎÄ¼þÁË£¬ÐèÒª¼ì²éÊÇ·ñÖØ¸´
+	// ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ø¸ï¿½
 	bool bCheckExists = (pParent->GetSubs().size() > 0);
 
 	std::string strPath(sPath);
@@ -206,7 +206,7 @@ std::string CFileDependTable::getAbsolutePath(const std::string& path)
 bool CFileDependTable::BuildTable(CFolder* pParent, const std::string& sPath, fp_fileFilter fp)
 {
 	assert(pParent != NULL);
-	// Èç¹ûÒÑ¾­ÓÐÎÄ¼þÁË£¬ÐèÒª¼ì²éÊÇ·ñÖØ¸´
+	// ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ø¸ï¿½
 	bool bCheckExists = (pParent->GetSubs().size() > 0);
 
 	std::string strPath(sPath);
@@ -537,7 +537,7 @@ CCodeFile* CFileDependTable::FindMatchedFile(CCodeFile* pFile, std::string sIncl
 			{
 				int index2 = index;
 				CFileBase* pFlag = pFile->GetParent();
-				// ¼ì²éÊÇ²»ÊÇµ±Ç°Ä¿Â¼£¬ÈçÊÇ£¬ÓÃÖ®
+				// ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Çµï¿½Ç°Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ï¿½Ö®
 				while(index2-- >= 0 && pFlag)
 				{
 					pFlag = pFlag->GetParent();
@@ -545,10 +545,10 @@ CCodeFile* CFileDependTable::FindMatchedFile(CCodeFile* pFile, std::string sIncl
 				if (pFlag == pNode)
 				{
 
-					// Îªµ±Ç°Ä¿Â¼
+					// Îªï¿½ï¿½Ç°Ä¿Â¼
 					return k->second;
 				}
-				// ¼ì²éÊÇ·ñÔÚincludeÄ¿Â¼
+				// ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½includeÄ¿Â¼
 				std::vector<CFolder*>::iterator iter = m_includePaths.begin();
 				std::vector<CFolder*>::iterator iterEnd = m_includePaths.end();
 				while (iter != iterEnd)
@@ -562,14 +562,14 @@ CCodeFile* CFileDependTable::FindMatchedFile(CCodeFile* pFile, std::string sIncl
 					if (pFlag == pNode)
 					{
 
-						// Îªµ±Ç°Ä¿Â¼
+						// Îªï¿½ï¿½Ç°Ä¿Â¼
 						return k->second;
 					}
 					iter++;
 				}
 
 				
-				// ²»ÔÚµ±Ç°Ä¿Â¼
+				// ï¿½ï¿½ï¿½Úµï¿½Ç°Ä¿Â¼
 				vecMatched.push_back(k->second);
 				
 			}
@@ -663,7 +663,7 @@ CCodeFile* CFileDependTable::FindShortestPath(const std::vector<CCodeFile*>& vec
 
 bool CFileDependTable::CreateFileDependTree(const std::vector<std::string> &paths, const std::vector<std::string> &includePaths, const std::vector<std::string>& excludesPaths)
 {
-	m_pRoot = new CFolder("root");
+	m_pRoot = new CFolder("");
 	std::vector<std::string>::const_iterator iterBegin = paths.begin();
 	std::vector<std::string>::const_iterator iterEnd = paths.end();
 	for (std::vector<std::string>::const_iterator iter = iterBegin; iter != iterEnd; iter++)
@@ -921,7 +921,7 @@ std::string CFileBase::GetFullPath()
 {
 	std::string sFullPath = GetName();
 	CFileBase* pFile = GetParent();
-	while (pFile && pFile->GetName() != "root")
+	while (pFile && pFile->GetName() != "")
 	{
 		sFullPath = pFile->GetName() + "/" + sFullPath;
 		pFile = pFile->GetParent();
